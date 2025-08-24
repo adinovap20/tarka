@@ -33,7 +33,7 @@ func (l *Lexer) NextToken() token.Token {
 		// Is letter
 		if isLetter(l.ch) {
 			tok.Literal = l.readIdentifier()
-			tok.Type = token.IDENT
+			tok.Type = token.LookupIdentifier(tok.Literal)
 			return tok
 		}
 		if isDigit(l.ch) {

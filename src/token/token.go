@@ -7,6 +7,17 @@ type Token struct {
 	Literal string
 }
 
+var keywords = map[string]TokenType{
+	"vad": VAD,
+}
+
+func LookupIdentifier(ident string) TokenType {
+	if tok, ok := keywords[ident]; ok {
+		return tok
+	}
+	return IDENT
+}
+
 const (
 	ILLEGAL = "ILLEGAL"
 	EOF     = "EOF"
@@ -16,4 +27,6 @@ const (
 	INT       = "INT"
 	SEMICOLON = ";"
 	COMMA     = ","
+
+	VAD = "VAD"
 )
