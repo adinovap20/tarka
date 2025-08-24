@@ -22,9 +22,16 @@ const (
 	ILLEGAL = "ILLEGAL"
 	EOF     = "EOF"
 
-	IDENT     = "IDENT"
-	ASSIGN    = "="
+	IDENT = "IDENT"
+
+	ASSIGN   = "="
+	PLUS     = "+"
+	MINUS    = "-"
+	MULTIPLY = "*"
+	DIVIDE   = "/"
+
 	INT       = "INT"
+	FLOAT     = "FLOAT"
 	SEMICOLON = ";"
 	COMMA     = ","
 

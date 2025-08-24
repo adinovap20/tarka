@@ -27,10 +27,19 @@ func (l *Lexer) NextToken() token.Token {
 		tok = newToken(token.SEMICOLON, ";")
 	case ',':
 		tok = newToken(token.COMMA, ",")
+	case '.':
+		tok = newToken(token.ILLEGAL, ".")
+	case '+':
+		tok = newToken(token.PLUS, "+")
+	case '-':
+		tok = newToken(token.MINUS, "-")
+	case '*':
+		tok = newToken(token.MULTIPLY, "*")
+	case '/':
+		tok = newToken(token.DIVIDE, "/")
 	case 0:
 		tok = newToken(token.EOF, "")
 	default:
-		// Is letter
 		if isLetter(l.ch) {
 			tok.Literal = l.readIdentifier()
 			tok.Type = token.LookupIdentifier(tok.Literal)
@@ -38,7 +47,7 @@ func (l *Lexer) NextToken() token.Token {
 		}
 		if isDigit(l.ch) {
 			tok.Literal = l.readNumber()
-			tok.Type = token.INT
+			tok.Type = l.getNumberType(tok.Literal)
 			return tok
 		}
 	}
@@ -56,10 +65,26 @@ func (l *Lexer) readIdentifier() string {
 
 func (l *Lexer) readNumber() string {
 	position := l.position
-	for isDigit(l.ch) {
+	totalDecimals := 0
+	for isDigit(l.ch) || l.ch == '.' {
+		if l.ch == '.' && totalDecimals != 0 {
+			return l.input[position:l.position]
+		}
+		if l.ch == '.' {
+			totalDecimals++
+		}
 		l.readChar()
 	}
 	return l.input[position:l.position]
+}
+
+func (l *Lexer) getNumberType(num string) token.TokenType {
+	for i := range len(num) {
+		if num[i] == '.' {
+			return token.FLOAT
+		}
+	}
+	return token.INT
 }
 
 func (l *Lexer) readChar() {
