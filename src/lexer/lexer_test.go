@@ -45,7 +45,7 @@ func TestNextToken(t *testing.T) {
 	{
 		// Set 2 : Printing support
 		cur = 2
-		input := "x = 1; vad x;"
+		input := "x = 1; say x;"
 		tests := []struct {
 			expectedType    token.TokenType
 			expectedLiteral string
@@ -54,7 +54,7 @@ func TestNextToken(t *testing.T) {
 			{token.ASSIGN, "="},
 			{token.INT, "1"},
 			{token.SEMICOLON, ";"},
-			{token.VAD, "vad"},
+			{token.SAY, "say"},
 			{token.IDENT, "x"},
 			{token.SEMICOLON, ";"},
 		}

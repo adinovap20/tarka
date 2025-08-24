@@ -8,7 +8,7 @@ type Token struct {
 }
 
 var keywords = map[string]TokenType{
-	"vad": VAD,
+	"say": SAY,
 }
 
 func LookupIdentifier(ident string) TokenType {
@@ -28,5 +28,5 @@ const (
 	SEMICOLON = ";"
 	COMMA     = ","
 
-	VAD = "VAD"
+	SAY = "SAY"
 )
