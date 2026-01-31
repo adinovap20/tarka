@@ -135,3 +135,8 @@ class SemanticErrorInvalidExitCode(SemanticError):
         :type col: int
         """
         super().__init__(f"Exit code should be between 0 and 255, inclusive. Invalid exit code {code}", line, col)
+
+
+class SemanticErrorTypeMissmatch(SemanticError):
+    def __init__(self, foundType: str, expectedType: str, line: int, col: int) -> None:
+        super().__init__(f"Expected type {expectedType}, found {foundType}", line, col)
