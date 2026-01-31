@@ -4,7 +4,9 @@ Entry point for the application
 
 import argparse
 
+from tarka.ast_printer import ASTPrinter
 from tarka.lexer import Lexer
+from tarka.parser import Parser
 
 
 def run() -> None:
@@ -22,6 +24,11 @@ def run() -> None:
     tokens = lexer.GetTokens()
     print("=== Lexical Analysis ==")
     print(", ".join(str(token) for token in tokens))
+    print("=== Syntax Analysis ==")
+    parser = Parser(tokens)
+    program = parser.Parse()
+    printer = ASTPrinter()
+    printer.visit(program)
 
 
 if __name__ == "__main__":

@@ -98,7 +98,7 @@ class Lexer:
         col: int = self.col
         while self.curPos < self.codeLen and (self.curChar.isalpha() or self.curChar == "_"):
             self.__readChar()
-        ident = self.code[beg : self.curPos - beg]
+        ident = self.code[beg : self.curPos]
         tokType = GetKeywordOrIdentifierTokenType(ident)
         return Token(tokType, ident, line, col)
 
@@ -115,5 +115,5 @@ class Lexer:
         col: int = self.col
         while self.curPos < self.codeLen and self.curChar.isdigit():
             self.__readChar()
-        number = self.code[beg : self.curPos - beg]
+        number = self.code[beg : self.curPos]
         return Token(TokenType.LIT_INT, number, line, col)
