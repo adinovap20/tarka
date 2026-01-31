@@ -43,6 +43,17 @@ class Token:
     col: int
     """Column number of the token"""
 
+    def __str__(self) -> str:
+        """
+        __str__ magic function to print(str(Token))
+
+        :param self: Token
+        :return: Representation of Token
+        :rtype: str
+        """
+        lit = "\\n" if self.lit == "\n" else self.lit
+        return f"[{self.type.name}, '{lit}', {self.line}:{self.col}]"
+
 
 keywords: dict[str, TokenType] = {
     "exit": TokenType.KW_EXIT,

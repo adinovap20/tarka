@@ -7,6 +7,9 @@
         "**/Thumbs.db": true,
         "**/__pycache__": true,
     },
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": "explicit",
+    },
     "editor.formatOnSave": true,
     "isort.args": [
         "--profile",
