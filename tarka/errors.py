@@ -95,3 +95,43 @@ class ParserErrorNoMatchingExpr(ParserError):
         :type tok: Token
         """
         super().__init__(f"No matching expression found for '{tok.lit}' of type {tok.type.name}", tok.line, tok.col)
+
+
+class SemanticError(Exception):
+    """
+    Semantic Error
+    """
+
+    def __init__(self, msg: str, line: int, col: int) -> None:
+        """
+        Initializes Semantic Error
+
+        :param self: Semantic Error
+        :param msg: Error Message
+        :type msg: str
+        :param line: Line no of the error
+        :type line: int
+        :param col: Column no of the error
+        :type col: int
+        """
+        super().__init__(f"Semantic Error - {msg} at line {line}:{col}")
+
+
+class SemanticErrorInvalidExitCode(SemanticError):
+    """
+    Semantic Error when exit code is not between 0 and 255.
+    """
+
+    def __init__(self, code: int, line: int, col: int) -> None:
+        """
+        Raises SemanticErrorInvalidExitCode
+
+        :param self: SemanticError
+        :param code: Exit code found
+        :type code: int
+        :param line: Line no of the occurrence
+        :type line: int
+        :param col: Column no of the occurrence
+        :type col: int
+        """
+        super().__init__(f"Exit code should be between 0 and 255, inclusive. Invalid exit code {code}", line, col)
